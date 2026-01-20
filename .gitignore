@@ -1,0 +1,28 @@
+# VS Code
+.vscode/
+*.code-workspace
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+target/
+bin/
+
+# C / C++
+*.o
+*.out
+*.exe
+*.obj
+*.elf
+a.out
+
+# Build folders
+build/
+dist/
+
+# OS junk
+.DS_Store
+Thumbs.db
