@@ -1,4 +1,4 @@
-# Exercise 9.1 — Device Specification Tracker
+# Exercise 01 — Device Specification Tracker
 
 ## Context
 Tech product catalog (phones, laptops, tablets)
@@ -23,7 +23,7 @@ Write a program that:
 
 ---
 
-# Exercise 9.2 — Ride Snapshot Recorder
+# Exercise 02 — Ride Snapshot Recorder
 
 ## Context
 Ride-sharing app snapshot (Uber-like, but simplified)
@@ -45,7 +45,7 @@ Create a class `Ride` with the following attributes:
 
 ---
 
-# Exercise 9.3 — IoT Sensor Snapshot System
+# Exercise 03 — IoT Sensor Snapshot System
 
 ## Context
 Smart building monitoring
