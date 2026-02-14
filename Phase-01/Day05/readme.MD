@@ -1,7 +1,7 @@
 # Exercise 06 
 - Campus Event Registration 
 - Context: University event platform 
-    - Class `EventRegistration`
+    - Class `EventRegister`
 
 - eventId 
 - studentId 
