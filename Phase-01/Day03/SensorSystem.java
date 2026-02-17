@@ -1,15 +1,13 @@
 class SensorReading {
 
-    int sensorId;        
-    String location;     
-    String type;           
+    int sensorId;
+    String location;
+    String type;
     double value;
-    String unit;           
+    String unit;
     String timestamp;
 
-    SensorReading(int sensorId, String location, String type,
-                  double value, String unit, String timestamp) {
-
+    SensorReading(int sensorId, String location, String type, double value, String unit, String timestamp) {
         this.sensorId = sensorId;
         this.location = location;
         this.type = type;
@@ -30,9 +28,7 @@ class SensorReading {
 }
 
 public class SensorSystem {
-
     public static void main(String[] args) {
-
         SensorReading[] readings = {
 
             new SensorReading(1001, "Thakurgaon", "Temperature", 32.5, "Celsius", "2025-06-01 10:00"),
@@ -67,11 +63,11 @@ public class SensorSystem {
             if (readings[i].type.equals("Temperature")) {
                 tempTotal += readings[i].value;
                 tempCount++;
-            }
+            } 
             else if (readings[i].type.equals("Humidity")) {
                 humTotal += readings[i].value;
                 humCount++;
-            }
+            } 
             else if (readings[i].type.equals("Pressure")) {
                 presTotal += readings[i].value;
                 presCount++;
@@ -80,15 +76,15 @@ public class SensorSystem {
             if (readings[i].location.equals("Dhaka")) {
                 dhakaTotal += readings[i].value;
                 dhakaCount++;
-            }
+            } 
             else if (readings[i].location.equals("Rangpur")) {
                 rangpurTotal += readings[i].value;
                 rangpurCount++;
-            }
+            } 
             else if (readings[i].location.equals("Thakurgaon")) {
                 thakurgaonTotal += readings[i].value;
                 thakurgaonCount++;
-            }
+            } 
             else if (readings[i].location.equals("Lalmonirhat")) {
                 lalmonirhatTotal += readings[i].value;
                 lalmonirhatCount++;
