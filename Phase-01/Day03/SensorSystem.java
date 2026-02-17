@@ -1,10 +1,10 @@
 class SensorReading {
 
-    int sensorId;          // Global ID
-    String location;       // City
-    String type;           // Temperature, Humidity, Pressure
+    int sensorId;        
+    String location;     
+    String type;           
     double value;
-    String unit;           // Celsius, Percent, hPa
+    String unit;           
     String timestamp;
 
     SensorReading(int sensorId, String location, String type,
