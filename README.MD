@@ -22,6 +22,10 @@ This repo is especially useful for beginners who want to practice Java step by s
 Problems are organized into folders based on topic or difficulty level.  
 Each folder contains standalone Java files that can be run independently, making it easy to understand and practice specific concepts. 
 
+# Problems Solved
+
+- Total 11+ problems solved.
+
 # Run Program
 
 Run the Java files using the following command in your terminal:
