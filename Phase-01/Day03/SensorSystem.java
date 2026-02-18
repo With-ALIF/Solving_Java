@@ -17,12 +17,8 @@ class SensorReading {
     }
 
     void display() {
-        System.out.println(
-            "ID: " + sensorId +
-            ", Location: " + location +
-            ", Type: " + type +
-            ", Value: " + value + " " + unit +
-            ", Time: " + timestamp
+        System.out.printf(
+            "%-6d %-15s %-12s %-10.2f %-10s %-20s%n", sensorId, location, type, value, unit, timestamp
         );
     }
 }
@@ -33,10 +29,20 @@ public class SensorSystem {
 
             new SensorReading(1001, "Thakurgaon", "Temperature", 32.5, "Celsius", "2025-06-01 10:00"),
             new SensorReading(1002, "Rangpur", "Humidity", 60.0, "Percent", "2025-06-01 10:05"),
-            new SensorReading(1003, "Thakurgaon", "Pressure", 1012.3, "hPa", "2025-06-01 10:10"),
+            new SensorReading(1003, "Thakurgaon", "Pressure", 1012.3, "hPa  ", "2025-06-01 10:10"),
             new SensorReading(1004, "Lalmonirhat", "Temperature", 35.2, "Celsius", "2025-06-01 11:00"),
             new SensorReading(1005, "Rangpur", "Humidity", 55.5, "Percent", "2025-06-01 11:05"),
-            new SensorReading(1006, "Lalmonirhat", "Temperature", 30.8, "Celsius", "2025-06-01 11:10")
+            new SensorReading(1006, "Lalmonirhat", "Temperature", 30.8, "Celsius", "2025-06-01 11:10"),
+            new SensorReading(1007, "Dhaka", "Temperature", 33.8, "Celsius", "2025-06-01 12:00"),
+            new SensorReading(1008, "Dhaka", "Humidity", 65.2, "Percent", "2025-06-01 12:05"),
+            new SensorReading(1009, "Rangpur", "Pressure", 1010.5, "hPa", "2025-06-01 12:10"),
+            new SensorReading(1010, "Thakurgaon", "Temperature", 29.4, "Celsius", "2025-06-01 13:00"),
+            new SensorReading(1011, "Lalmonirhat", "Humidity", 58.7, "Percent", "2025-06-01 13:05"),
+            new SensorReading(1012, "Dhaka", "Pressure", 1013.1, "hPa", "2025-06-01 13:10"),
+            new SensorReading(1013, "Rangpur", "Temperature", 31.6, "Celsius", "2025-06-01 14:00"),
+            new SensorReading(1014, "Thakurgaon", "Humidity", 62.3, "Percent", "2025-06-01 14:05"),
+            new SensorReading(1015, "Lalmonirhat", "Pressure", 1009.8, "hPa", "2025-06-01 14:10")
+
         };
 
         double globalTotal = 0;
@@ -49,7 +55,8 @@ public class SensorSystem {
         int dhakaCount = 0, rangpurCount = 0, thakurgaonCount = 0, lalmonirhatCount = 0;
 
         System.out.println("All Sensor Readings:\n");
-
+        System.out.printf( "%-6s %-15s %-12s %-10s %-10s %-20s%n", "ID", "Location", "Type", "Value", "Unit", "Time"  );
+        System.out.println("--------------------------------------------------------------------------");
         for (int i = 0; i < readings.length; i++) {
 
             readings[i].display();
