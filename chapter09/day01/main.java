@@ -16,7 +16,9 @@ public class main {
             new Reading("Room B", 22.0),
             new Reading("Room A", 26.0),
             new Reading("Room B", 21.5),
-            new Reading("Room A", 24.0)
+            new Reading("Room A", 24.0),
+            new Reading("Room A", 23.0),
+            new Reading("Room B", 23.5)
         };
 
         double sum = 0;
@@ -34,6 +36,6 @@ public class main {
             avg = sum / count;
         }
 
-        System.out.println("\nAverage temperature in Room A: \n" + avg);
+        System.out.println("\nAverage temperature in Room A:  " + avg);
     }
 }
