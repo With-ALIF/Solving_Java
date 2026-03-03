@@ -24,7 +24,7 @@ Each folder contains standalone Java files that can be run independently, making
 
 # Problems Solved
 
-- Total 13+ problems solved.
+- Total 20+ problems solved.
 
 # Run Program
 

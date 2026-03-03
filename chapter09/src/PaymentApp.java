@@ -1,5 +1,4 @@
 abstract class PaymentMethod {
-
     protected double amount;
     protected String transactionId;
 
