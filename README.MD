@@ -1,58 +1,84 @@
-# Solving Java 
+<div align="center">
 
-This repository contains Java programming problems and solutions that I solve while practicing and learning Java.  
-The main goal of this repository is to improve my problem-solving skills and build a strong foundation in core Java concepts.
+# ☕ Solving Java
 
-This repo is especially useful for beginners who want to practice Java step by step and for anyone preparing for interviews or strengthening logical thinking.
+<p>
+  <b>A dedicated repository for Java programming practice, OOP concepts, and algorithmic problem-solving.</b>
+</p>
 
-## Topics Covered
+[![Language](https://img.shields.io/badge/Language-Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)](https://www.java.com/)
+[![Author](https://img.shields.io/badge/Author-With--ALIF-181717?style=flat-square&logo=github)](https://github.com/With-ALIF)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-success?style=flat-square)](#)
 
-- Java Basics  
-- Object-Oriented Programming (OOP)  
-- Data Structures  
-- Algorithms  
-- Logical and Problem-Solving Exercises  
+</div>
 
-## Language Used
+---
 
-- Java
+## 📌 Overview
 
-## Repository Structure
+Welcome to **Solving Java**! This repository is maintained as a personal learning journey to build a strong foundation in Java and sharpen logical problem-solving skills. 
 
-Problems are organized into folders based on topic or difficulty level.  
-Each folder contains standalone Java files that can be run independently, making it easy to understand and practice specific concepts.
+Every solution is organized into independent files, making it easy to practice, test, and understand key programming concepts step-by-step.
+
+### 🎯 Focus Areas:
+- ☕ **Core Java Fundamentals** — Syntax, Data Types, Conditionals, Loops & Functions
+- 🧱 **Object-Oriented Programming (OOP)** — Classes, Objects, Inheritance, Encapsulation & Polymorphism
+- 🛠️ **Practical Systems** — Error Handling, Inventory & Session Management simulations
+- 🧠 **Problem Solving & Logic** — University coursework and algorithmic challenges
+
+---
 
 # Problems Solved
 
-- Total 20+ problems solved.
+<!-- PROBLEM_COUNT_START -->
+- Total 25 problems solved.
+<!-- PROBLEM_COUNT_END -->
 
-# Run Program
-
-Run the Java files using the following command in your terminal:
-
-```bash
-javac FileName.java
-java FileName
-```
 ---
+
+## 💻 How to Run the Code
+
+Make sure you have [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/) installed.
+
+### 1. Clone the repository
 ```bash
-javac main.java && java main
+git clone https://github.com/With-ALIF/solving_java.git
+cd solving_java
 ```
 
-## Contribution
-This is a personal practice repository, but suggestions and improvements are always welcome.
+### 2. Compile and run any program
+Navigate to any problem directory and execute:
 
-## How to Use
+```bash
+# Compile
+javac Main.java
 
-Clone the repository:
-   ```bash
-   git clone https://github.com/With-ALIF/solving_java.git
-   ```
+# Run
+java Main
+```
 
-## Author
+*(Or run both in a single step)*:
+```bash
+javac Main.java && java Main
+```
 
-Alif
+---
 
-CSE, BRUR
+## 🤝 Contribution
 
-Happy Coding 
+Suggestions, optimizations, and cleaner implementations are always welcome! Feel free to fork this repo, make your improvements, and open a **Pull Request**.
+
+---
+
+## 👨‍💻 Author
+
+**Alif**  
+🎓 Department of Computer Science & Engineering (CSE)  
+🏫 Begum Rokeya University, Rangpur (BRUR)  
+🌐 GitHub: [@With-ALIF](https://github.com/With-ALIF)
+
+---
+
+<div align="center">
+  <sub>⭐ If you find this repository helpful, consider giving it a star! • Happy Coding 🚀</sub>
+</div>
