@@ -2,11 +2,12 @@ name: Update Solved Problems Count
 
 on:
   schedule:
-    # Runs automatically every day at 00:00 UTC (6:00 AM BST)
     - cron: '0 0 * * *'
+
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 permissions:
@@ -15,13 +16,14 @@ permissions:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Count problems and update README
+      - name: Count solved problems and update README
         run: |
-          # 1. Detect README file (README.MD or README.md)
+          # Detect README file
           if [ -f "README.MD" ]; then
             README_FILE="README.MD"
           elif [ -f "README.md" ]; then
@@ -30,51 +32,172 @@ jobs:
             echo "Error: README file not found!"
             exit 1
           fi
+
           echo "Target README file: $README_FILE"
 
-          # 2. Count files in problems/ directory with supported extensions (.cpp, .c, .py, .java, .js, .ts)
-          if [ -d "problems" ]; then
-            COUNT=$(find problems -type f \( -iname "*.cpp" -o -iname "*.c" -o -iname "*.py" -o -iname "*.java" -o -iname "*.js" -o -iname "*.ts" \) | wc -l | tr -d ' ')
-          else
-            # If 'problems/' directory does not exist yet, count from root excluding .git and .github
-            COUNT=$(find . -type d \( -name ".git" -o -name ".github" \) -prune -o -type f \( -iname "*.cpp" -o -iname "*.c" -o -iname "*.py" -o -iname "*.java" -o -iname "*.js" -o -iname "*.ts" \) -print | wc -l | tr -d ' ')
-          fi
-          echo "Total problems solved: $COUNT"
+          # Count all C, C++, Java and Python files
+          # from any folder/subfolder.
+          # Exclude .git and .github
+          COUNT=$(find . \
+            -type d \( -path './.git' -o -path './.github' \) -prune -o \
+            -type f \( \
+              -iname "*.c" -o \
+              -iname "*.cpp" -o \
+              -iname "*.java" -o \
+              -iname "*.py" \
+            \) -print \
+            | wc -l | tr -d ' ')
 
-          # 3. Update the marker section in README using Python
-          python3 - <<EOF
+          echo "Total solved problems found: $COUNT"
+
+          OLD_COUNT=$(python3 - "$README_FILE" <<'PY'
           import re
+          import sys
+          from pathlib import Path
 
-          readme_file = "$README_FILE"
-          count = "$COUNT"
+          readme_file = Path(sys.argv[1])
 
-          with open(readme_file, "r", encoding="utf-8") as f:
-              content = f.read()
+          if not readme_file.exists():
+              print("0")
+              raise SystemExit(0)
 
-          pattern = r"<!--\s*PROBLEM_COUNT_START\s*-->[\s\S]*?<!--\s*PROBLEM_COUNT_END\s*-->"
-          replacement = f"<!-- PROBLEM_COUNT_START -->\n- Total {count} problems solved.\n<!-- PROBLEM_COUNT_END -->"
+          content = readme_file.read_text(encoding="utf-8")
 
-          if not re.search(pattern, content):
-              print(f"Error: Markers <!-- PROBLEM_COUNT_START --> and <!-- PROBLEM_COUNT_END --> not found in {readme_file}")
-              exit(1)
+          marker_pattern = re.compile(
+              r"<!--\s*PROBLEM_COUNT_START\s*-->\s*\n-\s*Total\s+(\d+)\s+problems\s+solved\.\s*\n<!--\s*PROBLEM_COUNT_END\s*-->",
+              re.M
+          )
+          match = marker_pattern.search(content)
+          if match:
+              print(match.group(1))
+              raise SystemExit(0)
 
-          updated_content = re.sub(pattern, replacement, content)
+          line_pattern = re.compile(
+              r"^- Total\s+(\d+)\s+problems\s+solved\.$",
+              re.M
+          )
+          match = line_pattern.search(content)
+          if match:
+              print(match.group(1))
+              raise SystemExit(0)
 
-          with open(readme_file, "w", encoding="utf-8") as f:
-              f.write(updated_content)
+          print("0")
+          PY
+          )
 
-          print(f"Successfully updated {readme_file} with count: {count}")
-          EOF
+          DIFF=$((COUNT - OLD_COUNT))
+          echo "Previous count: $OLD_COUNT"
+          echo "Difference: $DIFF"
 
-          # 4. Commit and push only if README has changed
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          # Update README
+          python3 - <<PY
+          import re
+          from pathlib import Path
 
-          if ! git diff --quiet "$README_FILE"; then
-            echo "Changes detected in $README_FILE. Committing and pushing..."
+          readme_file = Path("$README_FILE")
+          count = int("$COUNT")
+
+          content = readme_file.read_text(encoding="utf-8")
+
+          # ==========================================
+          # Method 1: HTML marker block
+          # ==========================================
+          marker_pattern = re.compile(
+              r"<!--\s*PROBLEM_COUNT_START\s*-->[\s\S]*?<!--\s*PROBLEM_COUNT_END\s*-->",
+              re.M
+          )
+
+          if marker_pattern.search(content):
+              replacement = (
+                  f"<!-- PROBLEM_COUNT_START -->\n"
+                  f"- Total {count} problems solved.\n"
+                  f"<!-- PROBLEM_COUNT_END -->"
+              )
+
+              new_content = marker_pattern.sub(
+                  replacement,
+                  content,
+                  count=1
+              )
+
+              readme_file.write_text(
+                  new_content,
+                  encoding="utf-8"
+              )
+
+              print(
+                  f"Updated README using markers: "
+                  f"{count} problems solved."
+              )
+
+              raise SystemExit(0)
+
+          # ==========================================
+          # Method 2: Plain line
+          # ==========================================
+          line_pattern = re.compile(
+              r"^- Total\s+\d+\s+problems\s+solved\.$",
+              re.M
+          )
+
+          if line_pattern.search(content):
+              new_line = f"- Total {count} problems solved."
+
+              new_content = line_pattern.sub(
+                  new_line,
+                  content,
+                  count=1
+              )
+
+              readme_file.write_text(
+                  new_content,
+                  encoding="utf-8"
+              )
+
+              print(
+                  f"Updated README using plain line: "
+                  f"{count} problems solved."
+              )
+
+              raise SystemExit(0)
+
+          # ==========================================
+          # Nothing found
+          # ==========================================
+          print(
+              "Error: Could not find either:"
+          )
+          print(
+              "1. <!-- PROBLEM_COUNT_START --> markers"
+          )
+          print(
+              "2. - Total <num> problems solved."
+          )
+
+          raise SystemExit(1)
+          PY
+
+          # ==========================================
+          # Git configuration
+          # ==========================================
+          git config --local user.email \
+            "github-actions[bot]@users.noreply.github.com"
+
+          git config --local user.name \
+            "github-actions[bot]"
+
+          # ==========================================
+          # Commit only if README changed
+          # ==========================================
+          if ! git diff --quiet -- "$README_FILE"; then
+
             git add "$README_FILE"
-            git commit -m "Update solved problems count to $COUNT"
+
+            git commit \
+              -m "update solved problems count by $DIFF"
+
             git push
+
           else
-            echo "No changes in problem count. Skipping commit."
+            echo "No changes. Skipping commit."
           fi

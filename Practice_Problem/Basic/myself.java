@@ -1,4 +1,4 @@
-// Print your name, age, and department on separate lines
+//1. Print your name, age, and department on separate lines
 
 public class myself {
      public static void main(String[] args) {
