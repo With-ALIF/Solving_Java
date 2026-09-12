@@ -31,7 +31,7 @@ Every solution is organized into independent files, making it easy to practice, 
 # Problems Solved
 
 <!-- PROBLEM_COUNT_START -->
-- Total 69 problems solved.
+- Total 93 problems solved.
 <!-- PROBLEM_COUNT_END -->
 
 ---
