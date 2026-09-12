@@ -2,7 +2,7 @@
 
 import java.util.Scanner;
 
-public class remainder {
+public class QuotientRemainder {
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
 
@@ -17,6 +17,5 @@ public class remainder {
         System.out.println("The remainder number: " + d);
 
         sc.close();
-
     }
 }
